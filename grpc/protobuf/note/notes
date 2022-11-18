@@ -1,0 +1,12 @@
+
+compile:
+         resources> protoc -I ="."  --java_out="." addressbook.proto
+         
+ Compiler:
+   
+https://developers.google.com/protocol-buffers/docs/downloads#release-packages
+
+maven latest plugin for java:
+
+https://search.maven.org/artifact/com.google.protobuf/protobuf-java
+      
