@@ -24,6 +24,7 @@ public class UserServer {
 					.addService(new UserServiceImpl())
 					.build();
 			server.start();
+			logger.info( "User server strated on port: "+port);
 			
 			shutdownHook();
 			
@@ -32,18 +33,18 @@ public class UserServer {
 		}
 	}
 
-	public void stopServer() throws InterruptedException {
-		if (server != null) {
-			server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
 
-		}
-	}
+    public void stopServer() throws InterruptedException {
+        if(server!=null){
+            server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
+        }
+    }
 
-	public void blockUntilShutdow() throws InterruptedException {
-		if (server != null) {
-			server.shutdown().awaitTermination();
-		}
-	}
+    public void blockUntilShutdown() throws InterruptedException {
+        if(server!=null){
+            server.awaitTermination();
+        }
+    }
 
 	public void shutdownHook() {
 
@@ -55,7 +56,7 @@ public class UserServer {
 				try {
 					UserServer.this.stopServer();
 				} catch (InterruptedException ex) {
-					logger.log(Level.SEVERE, "Server  did not stop", ex);
+					logger.log(Level.SEVERE, "Server shutdown interrupted", ex);
 				}
 			};
 		});
@@ -66,6 +67,6 @@ public class UserServer {
 		UserServer userServer = new UserServer();
 
 		userServer.startServer();
-		userServer.blockUntilShutdow(); //Server will keep running without termination
+		userServer.blockUntilShutdown(); //Server will keep running without termination
 	}
 }
