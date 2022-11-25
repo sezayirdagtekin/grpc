@@ -1,30 +1,32 @@
 package com.shopping.server;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.shopping.service.UserServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
-public class UserServer {
+import com.shopping.service.UserServiceImpl;
 
+public class UserServer {
+	
+	final static int PORT = 5001;
+	
 	private static final Logger logger = Logger.getLogger(UserServer.class.getName());
+	
 	private Server server;
 
-	public void startServer() {
+	public void startServer() throws SQLException {
 
 		try {
-
-			int port = 5001;
 			server = ServerBuilder
-					.forPort(port)
+					.forPort(PORT)
 					.addService(new UserServiceImpl())
 					.build();
 			server.start();
-			logger.info( "User server strated on port: "+port);
+			logger.info( "User server started on port: "+PORT);
 			
 			shutdownHook();
 			
@@ -62,7 +64,7 @@ public class UserServer {
 		});
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, SQLException {
 
 		UserServer userServer = new UserServer();
 

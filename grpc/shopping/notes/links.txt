@@ -1,0 +1,10 @@
+
+https://javabydeveloper.com/hibernate-5-example-with-different-configurations/
+
+https://stackoverflow.com/questions/38960921/java-hibernate-exception-the-internal-connection-pool-has-reached-its-maximum
+
+https://stackoverflow.com/questions/70695039/org-h2-jdbc-jdbcsqlsyntaxerrorexception-after-h2-version-upgrade
+
+https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+
+https://stackoverflow.com/questions/9482731/how-to-get-jdbc-connection-from-hibernate-session

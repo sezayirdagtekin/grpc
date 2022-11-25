@@ -1,19 +1,18 @@
 package com.shopping.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import com.shopping.db.H2DatabaseConnection;
 import com.shopping.entity.User;
 
 public class UserDao {
 
-	private static final String SQL = "select * from user where username=?";
-	
+	private static final String SQL = "From User Where username=:username";
+
 	private static final Logger logger = Logger.getLogger(UserDao.class.getName());
 
 	public User getUserDetail(String username) {
@@ -21,20 +20,24 @@ public class UserDao {
 		User user = new User();
 
 		try {
-			Connection connection = H2DatabaseConnection.getConnectionToDatabase();
-			PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-			preparedStatement.setString(1, username);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				user.setId(resultSet.getInt("id"));
-				user.setUsername(resultSet.getString("username"));
-				user.setName(resultSet.getString("name"));
-				user.setAge(resultSet.getInt("age"));
-				user.setGender(resultSet.getString("gender"));
-			}
-		} catch (SQLException exception) {
+			Session session = H2DatabaseConnection.getHibernateSession();
+					
+			Query<User> query = session.createQuery(SQL, User.class).setParameter("username", username);
+
+			user = query.getSingleResult();
+
+			user.setId(user.getId());
+			user.setUsername(user.getUsername());
+			//user.setPassword(user.getPassword());
+			user.setName(user.getName());
+			user.setAge(user.getAge());
+			user.setGender(user.getGender());
+			session.close();
+
+		} catch (Exception exception) {
 			logger.log(Level.SEVERE, "Could not execute query", exception);
 		}
+
 		return user;
 
 	}
