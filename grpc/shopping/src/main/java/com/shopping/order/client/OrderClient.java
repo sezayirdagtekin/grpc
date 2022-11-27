@@ -1,4 +1,4 @@
-package com.shopping.order;
+package com.shopping.order.client;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import com.shopping.stub.order.OrderServiceGrpc;
 
 import io.grpc.Channel;
 
-public class OrderClent {
+public class OrderClient {
 
 	private OrderServiceGrpc.OrderServiceBlockingStub orderServiceBlockingStub;
 
-	public OrderClent(Channel channel) {
+	public OrderClient(Channel channel) {
 		orderServiceBlockingStub = OrderServiceGrpc.newBlockingStub(channel);
 	}
 
