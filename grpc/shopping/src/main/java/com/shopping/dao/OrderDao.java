@@ -9,8 +9,6 @@ import org.hibernate.Session;
 import com.shopping.db.H2DatabaseConnection;
 import com.shopping.entity.Order;
 
-import io.grpc.InternalChannelz.ChannelTrace.Event.Severity;
-
 public class OrderDao {
 
 	private static final String SQL = "From Order Where userId=:userId";
