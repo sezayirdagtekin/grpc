@@ -10,7 +10,7 @@ import com.shopping.stub.order.OrderServiceGrpc.OrderServiceImplBase;
 
 import io.grpc.stub.StreamObserver;
 
-public class OderService extends OrderServiceImplBase {
+public class OderServiceImp extends OrderServiceImplBase {
 
 	private OrderDao orderDao = new OrderDao();
 
