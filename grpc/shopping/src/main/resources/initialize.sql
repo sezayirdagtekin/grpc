@@ -1,7 +1,7 @@
 drop table orders if exists;
-drop table user if exists;
+drop table users if exists;
 
-CREATE TABLE user (
+CREATE TABLE users (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(50) DEFAULT NULL,
   password varchar(50) DEFAULT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE user (
 );
 
 
-INSERT INTO user
+INSERT INTO users
 VALUES
 (1,'admin','admin','John Doe','MALE', 28),
 (2,'christian','christian','Christian Bale','MALE', 35),
@@ -29,10 +29,9 @@ CREATE TABLE orders (
   user_id int(11) DEFAULT NULL,
   no_of_items int(11) DEFAULT NULL,
   total_amount double DEFAULT NULL,
-  order_date date DEFAULT NULL,
   PRIMARY KEY (order_id),
-  foreign key (user_id) references user(id)
+  foreign key (user_id) references users(id)
  );
 
 
-INSERT INTO orders VALUES (1,5,3,635,'2020-01-10'),(2,8,1,1045,'2020-10-13');
+INSERT INTO orders VALUES (1,5,3,635),(2,8,1,1045), (3,5,5,1000);

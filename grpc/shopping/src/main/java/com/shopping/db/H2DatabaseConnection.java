@@ -22,7 +22,7 @@ public class H2DatabaseConnection {
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 
 	static {
-		initializeDatabase();
+	initializeDatabase();
 	}
 
 	private static SessionFactory buildSessionFactory() {
@@ -60,6 +60,7 @@ public class H2DatabaseConnection {
 	    **/
 		public static void initializeDatabase() {
 
+			logger.info("Db initialization  is started...");
 			try (InputStream is = H2DatabaseConnection.class.getClassLoader().getResourceAsStream("initialize.sql");) {
 				
 				Connection connection = getConnection();
@@ -73,7 +74,7 @@ public class H2DatabaseConnection {
 			} catch (SQLException ex) {
 				logger.log(Level.SEVERE, " Sql script execution is failed:" + ex);
 			}
-
+			logger.info("Db initialization  is completed...");
 		}
 
 		public static Connection getConnection() throws SQLException {

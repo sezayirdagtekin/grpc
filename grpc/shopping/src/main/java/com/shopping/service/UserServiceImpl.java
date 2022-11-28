@@ -36,7 +36,7 @@ public class UserServiceImpl extends UserServiceImplBase {
 	    .setGender(Gender.valueOf(user.getGender()))
 	    .build();
 
-		getOrders(userResponse);
+		//getOrders(userResponse);
 		
 		responseObserver.onNext(userResponse); 
 		responseObserver.onCompleted(); //Ensure rpc call complete

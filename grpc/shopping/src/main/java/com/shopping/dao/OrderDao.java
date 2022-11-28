@@ -18,10 +18,11 @@ public class OrderDao {
 	public List<Order> getOrdersForUsers(int userId) {
 		try {
 			Session session = H2DatabaseConnection.getHibernateSession();
-			return session.createQuery(SQL, Order.class).setParameter("userId", userId).getResultList();
+			List<Order> resultList = session.createQuery(SQL, Order.class).setParameter("userId", userId).getResultList();
+			return resultList;
 
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Could not execute query");
+			logger.log(Level.SEVERE, "Could not execute query",e);
 		}
 		return null;
 

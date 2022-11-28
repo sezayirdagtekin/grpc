@@ -9,7 +9,6 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import com.shopping.service.OderServiceImp;
-import com.shopping.service.UserServiceImpl;
 
 public class OrderServer {
 	
