@@ -9,7 +9,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import com.shopping.db.H2DatabaseConnection;
-import com.shopping.service.OderServiceImp;
+import com.shopping.service.OrderServiceImpl;
 
 public class OrderServer {
 	
@@ -25,7 +25,7 @@ public class OrderServer {
 			
 			server = ServerBuilder
 			        .forPort(PORT)
-			        .addService(new OderServiceImp())
+			        .addService(new OrderServiceImpl())
 			        .build();
 		
 			server.start();

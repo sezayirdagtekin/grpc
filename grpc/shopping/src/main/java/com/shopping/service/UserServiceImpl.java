@@ -43,6 +43,10 @@ public class UserServiceImpl extends UserServiceImplBase {
 	}
 
 	private List<Order> getOrders(int userId) {
+		
+        //get orders by invoking the Order Client
+        logger.info("Creating a channel and calling the Order Client");
+        
 		ManagedChannel channel= ManagedChannelBuilder
 								.forTarget("localhost:5002")
 								.usePlaintext().build();
