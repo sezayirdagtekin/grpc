@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import com.shopping.dao.UserDao;
 import com.shopping.entity.User;
 import com.shopping.order.client.OrderClient;
-import com.shopping.server.OrderServer;
 import com.shopping.stub.order.Order;
 import com.shopping.stub.user.Gender;
 import com.shopping.stub.user.UserRequest;
@@ -28,30 +27,28 @@ public class UserServiceImpl extends UserServiceImplBase {
 	public void getUserDetails(UserRequest request, StreamObserver<UserResponse> responseObserver) {
 
 		User user = userDao.getUserDetail(request.getUsername());
-
+		List<Order> orders = getOrders(user.getId());
+		
 		UserResponse userResponse = UserResponse.newBuilder()
 		.setName(user.getName())
 		.setUsername(user.getUsername())
 		.setId(user.getId())
 	    .setGender(Gender.valueOf(user.getGender()))
+	    .setNumOfOrders( orders!=null?orders.size():0)
 	    .build();
-
-		//getOrders(userResponse);
 		
 		responseObserver.onNext(userResponse); 
 		responseObserver.onCompleted(); //Ensure rpc call complete
 		
-		
-
 	}
 
-	private void getOrders(UserResponse userResponse) {
+	private List<Order> getOrders(int userId) {
 		ManagedChannel channel= ManagedChannelBuilder
 								.forTarget("localhost:5002")
 								.usePlaintext().build();
 		
 		OrderClient orderClient = new OrderClient(channel);
-		List<Order> order = orderClient.getOrders(userResponse.getId());
+		List<Order> orders = orderClient.getOrders(userId);
 		
 		//If you do not  have multiple call shut down channel. Otherwise keep channel open
 		
@@ -60,6 +57,7 @@ public class UserServiceImpl extends UserServiceImplBase {
 		} catch (InterruptedException e) {
 			logger.log(Level.SEVERE, "Channel did not shutdown", e);
 		}
+		return orders;
 	}
 
 }

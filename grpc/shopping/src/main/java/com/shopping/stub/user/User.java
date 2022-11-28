@@ -34,15 +34,16 @@ public final class User {
   static {
     java.lang.String[] descriptorData = {
       "\n\nuser.proto\022\026com.shopping.stub.user\"\037\n\013" +
-      "UserRequest\022\020\n\010username\030\001 \001(\t\"w\n\014UserRes" +
-      "ponse\022\n\n\002id\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\014\n\004n" +
-      "ame\030\003 \001(\t\022\013\n\003age\030\004 \001(\005\022.\n\006gender\030\005 \001(\0162\036" +
-      ".com.shopping.stub.user.Gender*)\n\006Gender" +
-      "\022\010\n\004MALE\020\000\022\n\n\006FEMALE\020\001\022\t\n\005OTHER\020\0022j\n\013Use" +
-      "rService\022[\n\016getUserDetails\022#.com.shoppin" +
-      "g.stub.user.UserRequest\032$.com.shopping.s" +
-      "tub.user.UserResponseB\032\n\026com.shopping.st" +
-      "ub.userP\001b\006proto3"
+      "UserRequest\022\020\n\010username\030\001 \001(\t\"\216\001\n\014UserRe" +
+      "sponse\022\n\n\002id\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\014\n\004" +
+      "name\030\003 \001(\t\022\013\n\003age\030\004 \001(\005\022.\n\006gender\030\005 \001(\0162" +
+      "\036.com.shopping.stub.user.Gender\022\025\n\rnum_o" +
+      "f_orders\030\006 \001(\005*)\n\006Gender\022\010\n\004MALE\020\000\022\n\n\006FE" +
+      "MALE\020\001\022\t\n\005OTHER\020\0022j\n\013UserService\022[\n\016getU" +
+      "serDetails\022#.com.shopping.stub.user.User" +
+      "Request\032$.com.shopping.stub.user.UserRes" +
+      "ponseB\032\n\026com.shopping.stub.userP\001b\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -59,7 +60,7 @@ public final class User {
     internal_static_com_shopping_stub_user_UserResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_shopping_stub_user_UserResponse_descriptor,
-        new java.lang.String[] { "Id", "Username", "Name", "Age", "Gender", });
+        new java.lang.String[] { "Id", "Username", "Name", "Age", "Gender", "NumOfOrders", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
