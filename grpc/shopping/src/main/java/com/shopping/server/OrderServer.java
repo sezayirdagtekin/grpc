@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
+import com.shopping.db.H2DatabaseConnection;
 import com.shopping.service.OderServiceImp;
 
 public class OrderServer {
@@ -28,7 +29,7 @@ public class OrderServer {
 			        .build();
 		
 			server.start();
-			
+			//H2DatabaseConnection.initializeDatabase();
 			logger.info( "Order server started on port: "+PORT);
 			
 			shutdownHook();

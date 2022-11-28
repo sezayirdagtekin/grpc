@@ -8,3 +8,7 @@ https://stackoverflow.com/questions/70695039/org-h2-jdbc-jdbcsqlsyntaxerrorexcep
 https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
 
 https://stackoverflow.com/questions/9482731/how-to-get-jdbc-connection-from-hibernate-session
+
+http://myjourneyonjava.blogspot.com/2014/12/different-ways-to-get-connection-object.html
+
+https://stackoverflow.com/questions/23214454/org-hibernate-mappingexception-unknown-entity-annotations-users

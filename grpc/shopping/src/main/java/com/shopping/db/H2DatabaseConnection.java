@@ -15,6 +15,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.internal.SessionImpl;
+import org.hibernate.jdbc.Work;
 public class H2DatabaseConnection {
 
 	private static final Logger logger = Logger.getLogger(H2DatabaseConnection.class.getName());
@@ -63,28 +66,26 @@ public class H2DatabaseConnection {
 			logger.info("Db initialization  is started...");
 			try (InputStream is = H2DatabaseConnection.class.getClassLoader().getResourceAsStream("initialize.sql");) {
 				
-				Connection connection = getConnection();
-				
-				Transaction tx = getHibernateSession().beginTransaction();
-				RunScript.execute(connection, new InputStreamReader(is));
-				tx.commit();
-
+					Session session = getHibernateSession();
+					session.doWork(new Work() {
+						
+						@Override
+						public void execute(Connection connection) throws SQLException {
+							Transaction tx = session.beginTransaction();
+							RunScript.execute(connection, new InputStreamReader(is));
+							tx.commit();	
+						}
+					});
+							
 			} catch (IOException ex) {
 				logger.log(Level.SEVERE, " File not  found :" + ex);
-			} catch (SQLException ex) {
-				logger.log(Level.SEVERE, " Sql script execution is failed:" + ex);
 			}
 			logger.info("Db initialization  is completed...");
+		
 		}
+		
 
-		public static Connection getConnection() throws SQLException {
-			Connection connection = sessionFactory
-					               .getSessionFactoryOptions()
-					               .getServiceRegistry()
-					               .getService(ConnectionProvider.class)
-					               .getConnection();
-			return connection;
-		}
+
 	  
 	 
 }
